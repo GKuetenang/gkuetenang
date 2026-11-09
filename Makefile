@@ -4,7 +4,7 @@
         celery-worker celery-beat tailwind build-css
 
 # Django avec uv
-UV = uv run --env-file .env
+UV = uv run --env-file .env.dev
 
 # ----------------------------------------
 # Django - Développement local
