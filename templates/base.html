@@ -7,15 +7,35 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=, maximum-scale-1">
+    <title>{{ seo.title }}</title>
+    <meta name="description" content="{{ seo.description }}">
+    <meta name="author" content="Gustave Kuetenang">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ seo.canonical_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ seo.locale }}">
+    <meta property="og:site_name" content="{{ seo.site_name }}">
+    <meta property="og:title" content="{{ seo.title }}">
+    <meta property="og:description" content="{{ seo.description }}">
+    <meta property="og:url" content="{{ seo.canonical_url }}">
+    <meta property="og:image" content="{{ seo.image_url }}">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="{{ seo.image_width }}">
+    <meta property="og:image:height" content="{{ seo.image_height }}">
+    <meta property="og:image:alt" content="{{ seo.image_alt }}">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ seo.title }}">
+    <meta name="twitter:description" content="{{ seo.description }}">
+    <meta name="twitter:image" content="{{ seo.image_url }}">
+    <meta name="twitter:image:alt" content="{{ seo.image_alt }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token }}">
-    <title>
-        {% block title %}{% endblock %} | Gustave kuetenang
-    </title>
 
     <style>
         #global-preloader {

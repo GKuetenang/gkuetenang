@@ -199,6 +199,52 @@ class HomeViewTests(TestCase):
         self.assertNotContains(response, self.oldest_project.title)
 
 
+class SeoMetadataTests(TestCase):
+    pages = {
+        "/": "Gustave Kuetenang | Développeur Full-Stack",
+        "/about/": "À propos | Gustave Kuetenang",
+        "/services/": "Services de développement web | Gustave Kuetenang",
+        "/portfolio/": "Projets et réalisations | Gustave Kuetenang",
+        "/contact/": "Contact | Gustave Kuetenang",
+    }
+
+    def test_main_pages_have_specific_metadata(self):
+        for path, expected_title in self.pages.items():
+            with self.subTest(path=path):
+                response = self.client.get(path)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(
+                    response.context["seo"]["title"],
+                    expected_title,
+                )
+                self.assertContains(response, f"<title>{expected_title}</title>")
+                self.assertContains(
+                    response,
+                    f'<meta property="og:title" content="{expected_title}">',
+                )
+
+    def test_social_image_uses_requested_static_asset(self):
+        response = self.client.get("/")
+        image_url = response.context["seo"]["image_url"]
+
+        self.assertIn("/static/images/profile_photo", image_url)
+        self.assertTrue(image_url.endswith(".webp"))
+        self.assertContains(
+            response,
+            'property="og:image" '
+            f'content="{image_url}"',
+        )
+
+    def test_canonical_url_excludes_query_string(self):
+        response = self.client.get("/about/", {"utm_source": "test"})
+
+        self.assertEqual(
+            response.context["seo"]["canonical_url"],
+            "http://testserver/about/",
+        )
+
+
 class PortfolioViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -233,7 +279,7 @@ class PortfolioViewTests(TestCase):
         self.assertEqual(len(response.context["projects"]), 3)
         self.assertContains(response, "Gestion des utilisateurs")
         self.assertContains(response, "Django")
-        self.assertContains(response, "/static/project_placeholder.png")
+        self.assertContains(response, "/media/project_placeholder.png")
 
     def test_portfolio_search_filters_projects(self):
         response = self.client.get("/portfolio/", {"q": "API REST"})
