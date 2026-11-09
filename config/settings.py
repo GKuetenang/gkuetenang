@@ -21,8 +21,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / '.env')
-
 
 def env_bool(name: str, default: bool = False) -> bool:
     value = os.getenv(name)
@@ -47,7 +45,7 @@ def env_list(name: str) -> list[str]:
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+k&sa^&l@@8fgb!fq9_r)e3u%u&%hj3fd8$5_vylw1lqk(0rs1'
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool("DJANGO_DEBUG", False)
@@ -75,6 +73,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -162,6 +161,17 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        ),
+    },
+}
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -170,7 +180,7 @@ DJANGO_VITE = {
         "dev_mode": DEBUG,
         "dev_server_host": "127.0.0.1",
         "dev_server_port": 5173,
-        "static_url_prefix": "/" if DEBUG else "static/",
+        "static_url_prefix": "",
         "manifest_path": (
             BASE_DIR / "static/.vite/manifest.json"
         ),
