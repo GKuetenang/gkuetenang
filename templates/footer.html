@@ -1,0 +1,71 @@
+<footer class="border-t border-border bg-background">
+    <div class="mx-auto flex page-content flex-col gap-5 py-6">
+        <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+
+            <!-- Copyright -->
+            <p class="text-sm text-muted-foreground">
+                © {% now "Y" %} Gustave Kuetenang · Tout droit réservé.
+            </p>
+
+            <!-- Links and actions -->
+            <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+
+                <!-- Theme switcher -->
+                <div x-data class="flex items-center gap-1 rounded-full border border-border p-1" role="group"
+                    aria-label="Choisir le thème">
+
+                    <!-- Light -->
+                    <button type="button" @click="$store.theme.set('light')"
+                        :aria-pressed="$store.theme.mode === 'light'" :class="$store.theme.mode === 'light'
+                            ? 'bg-secondary text-secondary-foreground'
+                            : 'text-muted-foreground hover:text-foreground'"
+                        class="flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors"
+                        aria-label="Thème clair" title="Thème clair">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            aria-hidden="true">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                        </svg>
+                    </button>
+
+                    <!-- Dark -->
+                    <button type="button" @click="$store.theme.set('dark')" :aria-pressed="$store.theme.mode === 'dark'"
+                        :class="$store.theme.mode === 'dark'
+                            ? 'bg-secondary text-secondary-foreground'
+                            : 'text-muted-foreground hover:text-foreground'"
+                        class="flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors"
+                        aria-label="Thème sombre" title="Thème sombre">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            aria-hidden="true">
+                            <path d="M20.985 12.486A9 9 0 0 1 11.514 3.015 9 9 0 1 0 20.985 12.486Z" />
+                        </svg>
+                    </button>
+
+                    <!-- System -->
+                    <button type="button" @click="$store.theme.set('system')"
+                        :aria-pressed="$store.theme.mode === 'system'" :class="$store.theme.mode === 'system'
+                            ? 'bg-secondary text-secondary-foreground'
+                            : 'text-muted-foreground hover:text-foreground'"
+                        class="flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors"
+                        aria-label="Thème du système" title="Utiliser le thème du système">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="14" rx="2" />
+                            <path d="M8 22h8m-4-4v4" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Back to top -->
+                <a href="#top" aria-label="Retour en haut"
+                    class="flex size-8 cursor-pointer items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-secondary">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        aria-hidden="true">
+                        <path d="m12 19 0-14m-6 6 6-6 6 6" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

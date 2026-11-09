@@ -1,0 +1,117 @@
+
+# ==========================================
+# GKUETENANG - .gitignore
+# Django + uv + Tailwind CSS + Docker
+# ==========================================
+
+# ------------------------------------------
+# Python
+# ------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyright/
+.tox/
+.nox/
+
+# ------------------------------------------
+# Environment variables & secrets
+# ------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+
+*.pem
+*.key
+*.p12
+
+# ------------------------------------------
+# Django
+# ------------------------------------------
+*.log
+local_settings.py
+
+# Local database
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Uploaded media
+media/
+
+# Collected static files
+staticfiles/
+
+# ------------------------------------------
+# Tailwind CSS / Node.js
+# ------------------------------------------
+node_modules/
+.npm/
+.pnpm-store/
+
+# Compiled Tailwind output
+static/css/app.css
+static/css/app.css.map
+
+# Build outputs
+.next/
+.nuxt/
+.parcel-cache/
+
+# ------------------------------------------
+# Testing & coverage
+# ------------------------------------------
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+test-results/
+
+# ------------------------------------------
+# IDE / Editors
+# ------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ------------------------------------------
+# Operating systems
+# ------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ------------------------------------------
+# Temporary files
+# ------------------------------------------
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ------------------------------------------
+# Database backups
+# ------------------------------------------
+*.sql.gz
+*.dump
+*.backup

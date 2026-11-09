@@ -1,0 +1,11 @@
+{
+  "frontend/main.js": {
+    "file": "vite-assets/main-cyuJYN8k.js",
+    "name": "main",
+    "src": "frontend/main.js",
+    "isEntry": true,
+    "css": [
+      "vite-assets/main-CblydLqY.css"
+    ]
+  }
+}

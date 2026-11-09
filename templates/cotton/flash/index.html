@@ -1,0 +1,31 @@
+{% if messages %}
+<div class="flash-messages">
+
+    {% for message in messages %}
+
+    <!-- Déclenchement automatique à l'initialisation -->
+    <div x-data x-init="$nextTick(() => $dispatch('show-toast', 'flash-{{ forloop.counter }}'))" class="hidden">
+    </div>
+
+    <!-- Notification -->
+    <c-toast id="flash-{{ forloop.counter }}">
+
+        {% if message.tags == "error" %}
+        <c-toast.content type="destructive" title="Erreur" description="{{ message }}" />
+
+        {% elif message.tags == "success" %}
+        <c-toast.content type="success" title="Succès" description="{{ message }}" />
+
+        {% elif message.tags == "warning" %}
+        <c-toast.content type="warning" title="Attention" description="{{ message }}" />
+
+        {% else %}
+        <c-toast.content type="default" title="Information" description="{{ message }}" />
+        {% endif %}
+
+    </c-toast>
+
+    {% endfor %}
+
+</div>
+{% endif %}

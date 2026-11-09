@@ -1,0 +1,120 @@
+<section id="services" aria-labelledby="services-title" class="bg-background py-16 text-foreground sm:py-20 lg:py-24">
+    <div class="page-content">
+        <div class="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+            <div>
+                <p class="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-primary sm:text-[11px]">
+                    02 / Services
+                </p>
+
+                <h2 id="services-title"
+                    class="max-w-3xl text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.06em]">
+                    De l'interface à l'<span class="text-primary">API.</span>
+                </h2>
+            </div>
+
+            <p class="max-w-[240px] text-sm leading-6 text-muted-foreground lg:mb-1">
+                Un accompagnement technique ciblé, de la fonctionnalité à l'application complète.
+            </p>
+        </div>
+
+        <div class="mt-9 grid gap-3 lg:grid-cols-3">
+            <c-card class="min-h-[240px] rounded-2xl border-border/80 shadow-none">
+                <c-card.header class="flex items-start justify-between p-5 sm:p-6">
+                    <!-- <div class="text-[10px] font-bold tracking-[0.14em] text-muted-foreground">01</div> -->
+
+                    <div class="flex size-9 items-center justify-center rounded-xl bg-accent text-primary"
+                        aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3.5" y="5" width="17" height="14" rx="2" />
+                            <path d="M3.5 9h17M8 7h.01M11 7h.01M8 14l-2 2 2 2M13 14l2 2-2 2" />
+                        </svg>
+                    </div>
+                </c-card.header>
+
+                <c-card.content class="flex flex-1 flex-col justify-between px-5 pb-5 sm:px-6 sm:pb-6">
+                    <div>
+                        <c-card.title class="text-[18px] tracking-[-0.04em] sm:text-[19px]">
+                            Développement front-end
+                        </c-card.title>
+                        <c-card.description class="mt-3 text-[13px] leading-[1.55]">
+                            Interfaces réactives, accessibles et adaptées à tous les écrans avec React, Next.js et
+                            Tailwind CSS.
+                        </c-card.description>
+                    </div>
+
+                    <a href="#contact"
+                        class="group mt-6 inline-flex items-center gap-1 text-[10px] font-bold text-primary transition-colors hover:text-primary-strong">
+                        Interfaces & expériences
+                        <c-icons.arrow_right />
+                    </a>
+                </c-card.content>
+            </c-card>
+
+            <c-card class="min-h-[240px] rounded-2xl border-border/80 shadow-none">
+                <c-card.header class="flex items-start justify-between p-5 sm:p-6">
+                    <!-- <span class="text-[10px] font-bold tracking-[0.14em] text-muted-foreground">02</span> -->
+
+                    <span class="flex size-9 items-center justify-center rounded-xl bg-accent text-primary"
+                        aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14" />
+                        </svg>
+                    </span>
+                </c-card.header>
+
+                <c-card.content class="flex flex-1 flex-col justify-between px-5 pb-5 sm:px-6 sm:pb-6">
+                    <div>
+                        <c-card.title class="text-[18px] tracking-[-0.04em] sm:text-[19px]">
+                            Back-end & API
+                        </c-card.title>
+                        <c-card.description class="mt-3 text-[13px] leading-[1.55]">
+                            Logique métier, services web, intégrations et accès aux données : des fondations stables et
+                            sécurisées.
+                        </c-card.description>
+                    </div>
+
+                    <a href="#contact"
+                        class="group mt-6 inline-flex items-center gap-1 text-[10px] font-bold text-primary transition-colors hover:text-primary-strong">
+                        Architecture & logique métier
+                        <c-icons.arrow_right />
+                    </a>
+                </c-card.content>
+            </c-card>
+
+            <c-card class="min-h-[240px] rounded-2xl border-border/80 shadow-none">
+                <c-card.header class="flex items-start justify-between p-5 sm:p-6">
+                    <!-- <span class="text-[10px] font-bold tracking-[0.14em] text-muted-foreground">03</span> -->
+
+                    <span class="flex size-9 items-center justify-center rounded-xl bg-accent text-primary"
+                        aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="size-[18px]" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m12 3 1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z" />
+                            <path d="m19 15 .6 2.4L22 18l-2.4.6L19 21l-.6-2.4L16 18l2.4-.6L19 15Z" />
+                        </svg>
+                    </span>
+                </c-card.header>
+
+                <c-card.content class="flex flex-1 flex-col justify-between px-5 pb-5 sm:px-6 sm:pb-6">
+                    <div>
+                        <c-card.title class="text-[18px] tracking-[-0.04em] sm:text-[19px]">
+                            Qualité & évolution
+                        </c-card.title>
+                        <c-card.description class="mt-3 text-[13px] leading-[1.55]">
+                            Refactorisation, optimisation des performances, intégration continue et maintenance de
+                            solutions existantes.
+                        </c-card.description>
+                    </div>
+
+                    <a href="#contact"
+                        class="group mt-6 inline-flex items-center gap-1 text-[10px] font-bold text-primary transition-colors hover:text-primary-strong">
+                        Performance & pérennité
+                        <c-icons.arrow_right />
+                    </a>
+                </c-card.content>
+            </c-card>
+        </div>
+    </div>
+</section>

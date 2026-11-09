@@ -1,0 +1,29 @@
+{% extends "emails/base.html" %}
+
+{% block email_title %}Votre message a bien été reçu{% endblock %}
+{% block preheader %}Merci {{ name }}, votre message a bien été enregistré.{% endblock %}
+{% block eyebrow %}● &nbsp; Message reçu{% endblock %}
+{% block heading %}Merci pour votre<br><span style="color:#ad9cff;">message.</span>{% endblock %}
+{% block introduction %}Votre demande a bien été enregistrée. Je prendrai le temps de la consulter et je vous répondrai dès que possible.{% endblock %}
+
+{% block content %}
+  <p style="margin:0 0 18px; font-size:16px; line-height:26px; color:#202330;">Bonjour {{ name }},</p>
+  <p style="margin:0 0 24px; font-size:15px; line-height:26px; color:#4b4f5f;">Cet email confirme uniquement la bonne réception de votre message depuis le formulaire du portfolio.</p>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; border-collapse:collapse; background:#f7f7f3; border-left:4px solid #765cf1;">
+    <tr>
+      <td style="padding:20px 22px;">
+        <p style="margin:0 0 6px; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1px; color:#666a7c; text-transform:uppercase;">Sujet de votre demande</p>
+        <p style="margin:0; font-size:16px; line-height:24px; font-weight:700; color:#202330;">{{ subject|default:"Sans objet" }}</p>
+      </td>
+    </tr>
+  </table>
+  <p style="margin:24px 0 0; font-size:15px; line-height:26px; color:#4b4f5f;">À bientôt,<br><strong style="color:#202330;">Gustave Kuetenang</strong></p>
+{% endblock %}
+
+{% block notice %}
+  <tr>
+    <td class="email-padding" style="padding:22px 32px; background:#efebff; color:#4a4568; font-size:13px; line-height:21px;">
+      Cet accusé de réception est automatique. Il ne confirme pas encore la lecture ou la livraison d’une réponse.
+    </td>
+  </tr>
+{% endblock %}

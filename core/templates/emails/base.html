@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>{% block email_title %}G. CKT{% endblock %}</title>
+    <style>
+      @media only screen and (max-width: 640px) {
+        .email-shell { width: 100% !important; }
+        .email-padding { padding-left: 24px !important; padding-right: 24px !important; }
+        .email-title { font-size: 30px !important; line-height: 36px !important; }
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; background:#f7f7f3; color:#202330; font-family:Arial, Helvetica, sans-serif;">
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent;">
+      {% block preheader %}{% endblock %}
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; background:#f7f7f3; border-collapse:collapse;">
+      <tr>
+        <td align="center" style="padding:30px 12px;">
+          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" class="email-shell" style="width:600px; max-width:600px; border-collapse:collapse; background:#ffffff;">
+            <tr>
+              <td style="height:5px; background:#765cf1; font-size:0; line-height:0;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td class="email-padding" style="padding:30px 32px 18px; background:#121726; color:#ffffff;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; border-collapse:collapse;">
+                  <tr>
+                    <td style="font-size:21px; line-height:26px; font-weight:700; color:#ffffff;">G. CKT</td>
+                    <td align="right" style="font-size:10px; line-height:16px; font-weight:700; letter-spacing:2px; color:#c8c0ef; text-transform:uppercase;">Portfolio / Contact</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="email-padding" style="padding:20px 32px 36px; background:#121726; color:#ffffff;">
+                <p style="margin:0 0 14px; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1.5px; color:#b7f297; text-transform:uppercase;">{% block eyebrow %}{% endblock %}</p>
+                <h1 class="email-title" style="margin:0; font-size:34px; line-height:40px; font-weight:700; letter-spacing:-1.2px; color:#ffffff;">{% block heading %}{% endblock %}</h1>
+                <p style="margin:20px 0 0; font-size:14px; line-height:22px; color:#d7d8e0;">{% block introduction %}{% endblock %}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="email-padding" style="padding:32px; background:#ffffff; color:#202330;">
+                {% block content %}{% endblock %}
+              </td>
+            </tr>
+            {% block notice %}{% endblock %}
+          </table>
+          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" class="email-shell" style="width:600px; max-width:600px; border-collapse:collapse;">
+            <tr>
+              <td align="center" style="padding:22px 20px 0; font-size:11px; line-height:18px; color:#7c7e89;">
+                Notification automatique · Formulaire de contact<br>
+                {% if site_url %}{{ site_url }}{% endif %}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

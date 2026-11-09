@@ -1,0 +1,116 @@
+<section aria-labelledby="contact-section-title" class="bg-background py-16 text-foreground sm:py-20 lg:py-24">
+  <div
+    class="mx-auto grid max-w-7xl items-start gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-12">
+    <!-- Informations de contact -->
+    <div class="lg:pt-5">
+      <p class="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Restons en contact</p>
+      <h2 id="contact-section-title"
+        class="max-w-lg text-3xl font-semibold leading-[1.15] tracking-[-0.05em] sm:text-4xl">
+        Discutons de votre<br>
+        projet, <span class="text-primary">simplement.</span>
+      </h2>
+      <p class="mt-6 max-w-lg text-base leading-8 text-muted-foreground">
+        Expliquez-moi votre besoin, les objectifs et les contraintes de votre projet.
+        Je prendrai le temps d'étudier votre demande.
+      </p>
+
+      <div class="mt-10 space-y-8">
+        <div class="flex items-start gap-4">
+          <div class="flex size-13 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold">Par courriel</h3>
+            {% if public_contact_email %}
+            <a href="mailto:{{ public_contact_email }}"
+              class="mt-1 block break-all text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+              {{ public_contact_email }}</a>
+            {% else %}
+            <p class="mt-1 text-sm text-muted-foreground">Utilisez le formulaire ci-contre pour me joindre.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex size-13 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12H4V7Z" />
+              <path d="M9 5V3h6v2M4 12h16M10 12v2h4v-2" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold">Par téléphone</h3>
+            {% if public_contact_phone and public_contact_phone_ref %}
+            <a href="tel:{{ public_contact_phone_ref }}"
+              class="mt-1 block break-all text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+              {{ public_contact_phone }}</a>
+            {% else %}
+            <p class="mt-1 text-sm text-muted-foreground">Utilisez le formulaire ci-contre pour me joindre.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if linkedin_url %}
+        <div class="flex items-start gap-4">
+          <div class="flex size-13 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <svg class="size-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M5.1 8.3H2.5V21h2.6V8.3ZM3.8 2a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2ZM21 13.7c0-3.4-1.8-5.1-4.3-5.1-2 0-2.9 1.1-3.4 1.9V8.3h-2.6V21h2.6v-7.1c0-1.9.5-3 2.3-3 1.7 0 2.4 1.2 2.4 3V21H21v-7.3Z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold">LinkedIn</h3>
+            <a href="{{ linkedin_url }}" target="_blank" rel="noopener noreferrer"
+              class="mt-1 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Consulter
+              mon profil <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div
+      class="rounded-3xl border border-border bg-card p-6 text-card-foreground shadow-xl shadow-navy/5 sm:p-8 lg:p-10">
+      <p class="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Envoyez-moi un message</p>
+      <h2 class="text-2xl font-semibold tracking-[-0.045em] sm:text-3xl">Je suis à votre écoute.</h2>
+      <p class="mt-3 text-sm leading-7 text-muted-foreground">Complétez les quatre champs ci-dessous pour m'expliquer
+        votre demande.</p>
+
+      {% if form.non_field_errors %}
+      <div role="alert"
+        class="mt-6 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+
+      <form method="post" action="" class="mt-8 space-y-5">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <c-form.field>
+          <c-form.label for="{{ field.id_for_label }}" class="mb-2 block text-sm font-semibold">
+            {{ field.label }}
+            {% if field.field.required %}<span class="text-destructive" aria-hidden="true">*</span>{% endif %}
+          </c-form.label>
+          {{ field }}
+          {% for error in field.errors %}<p role="alert" class="mt-2 text-xs text-destructive">{{ error }}</p>
+          {% endfor %}
+        </c-form.field>
+        {% endfor %}
+
+
+        <c-button type="submit" size="lg" class="w-full !rounded-full">
+          Envoyer le message
+        </c-button>
+        <p class="text-xs leading-5 text-muted-foreground">Les informations envoyées servent uniquement à répondre à
+          votre demande.</p>
+      </form>
+    </div>
+  </div>
+</section>

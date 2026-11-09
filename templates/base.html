@@ -1,0 +1,87 @@
+{% load django_vite %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>
+        {% block title %}{% endblock %} | Gustave kuetenang
+    </title>
+
+    <style>
+        #global-preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f3;
+        }
+
+        html.dark #global-preloader {
+            background: #121726;
+        }
+
+        html.page-loading #global-preloader {
+            display: flex;
+        }
+
+        .global-preloader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #DBEAFE;
+            border-top-color: #2563EB;
+            border-radius: 50%;
+            animation: global-preloader-spin 0.7s linear infinite;
+        }
+
+        @keyframes global-preloader-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .global-preloader-spinner {
+                animation: none;
+            }
+        }
+    </style>
+
+    <script>
+        document.documentElement.classList.add("page-loading");
+    </script>
+
+    {% vite_hmr_client %}
+    {% vite_asset "frontend/main.js" %}
+</head>
+
+<body class="min-h-screen bg-background text-foreground">
+
+    <div id="global-preloader" role="status" aria-label="Chargement en cours">
+        <div class="global-preloader-spinner"></div>
+    </div>
+
+    {% include 'navbar.html' %}
+
+    <main class="min-h-[calc(100vh-162px)] flex flex-col">
+        {% block content %}{% endblock %}
+    </main>
+
+    <c-flash />
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

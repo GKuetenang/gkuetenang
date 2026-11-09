@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+:root {
+  /* Identité graphique */
+  --brand-navy: #121726;
+  --brand-blue: #2563EB;
+  --brand-cream: #F7F7F3;
+  --brand-green: #B7F297;
+  --brand-light-blue: #DBEAFE;
+  --brand-ink: #141824;
+
+  /* Surfaces et typographie */
+  --background: var(--brand-cream);
+  --foreground: var(--brand-ink);
+
+  --card: #FFFFFF;
+  --card-foreground: var(--brand-ink);
+
+  --popover: #FFFFFF;
+  --popover-foreground: var(--brand-ink);
+
+  /* Couleur principale */
+  --primary: var(--brand-blue);
+  --primary-foreground: #FFFFFF;
+  --primary-strong: #1D4ED8;
+
+  /* Couleurs secondaires */
+  --secondary: var(--brand-light-blue);
+  --secondary-foreground: var(--brand-navy);
+
+  --muted: #EFF2F7;
+  --muted-foreground: #626477;
+
+  /* Accent shadcn : bleu pâle */
+  --accent: #EFF6FF;
+  --accent-foreground: var(--brand-navy);
+
+  /* Vert réservé aux titres */
+  --highlight: #31734B;
+
+  /* États */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E2E8F0;
+  --input: #CBD5E1;
+  --ring: var(--brand-blue);
+
+  /* Bordures arrondies */
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Le navy devient le fond principal */
+  --background: var(--brand-navy);
+  --foreground: var(--brand-cream);
+
+  --card: #1C2233;
+  --card-foreground: var(--brand-cream);
+
+  --popover: #1C2233;
+  --popover-foreground: var(--brand-cream);
+
+  /* Bleu plus lumineux en mode sombre */
+  --primary: #60A5FA;
+  --primary-foreground: var(--brand-navy);
+  --primary-strong: #3B82F6;
+
+  /* Couleurs secondaires */
+  --secondary: #1E3354;
+  --secondary-foreground: #DBEAFE;
+
+  --muted: #252B3B;
+  --muted-foreground: #ACADC2;
+
+  /* Accent bleu sombre */
+  --accent: #1E3354;
+  --accent-foreground: #DBEAFE;
+
+  /* Vert clair, réservé aux titres */
+  --highlight: var(--brand-green);
+
+  /* États */
+  --destructive: #F87171;
+  --destructive-foreground: var(--brand-navy);
+
+  --border: #343F56;
+  --input: #343F56;
+  --ring: #60A5FA;
+}
+
+
+
+@theme inline {
+  /* Tokens sémantiques */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-strong: var(--primary-strong);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-highlight: var(--highlight);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Tokens de marque */
+  --color-navy: var(--brand-navy);
+  --color-blue: var(--brand-blue);
+  --color-cream: var(--brand-cream);
+  --color-soft-green: var(--brand-green);
+  --color-light-blue: var(--brand-light-blue);
+  --color-ink: var(--brand-ink);
+
+  /* Rayons */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .page-content {
+    @apply mx-auto max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+}

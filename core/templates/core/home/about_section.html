@@ -1,0 +1,47 @@
+<section id="apropos" aria-labelledby="about-title" class="bg-card py-14 text-card-foreground sm:py-18">
+    <div class="page-content mx-auto grid gap-9lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+
+        <!-- En-tête de la section -->
+        <div>
+            <p class="mb-4 text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
+                À propos
+            </p>
+
+            <h2 id="about-title" class="text-[35px] font-semibold leading-[1.11] tracking-[-0.06em] sm:text-[43px]">
+                L'essentiel,<br>
+                <span class="text-primary">
+                    au-delà du code.
+                </span>
+            </h2>
+        </div>
+
+        <!-- Présentation -->
+        <div class="lg:pt-1">
+
+            <p class="text-[20px] font-medium leading-[1.6] tracking-[-0.03em] text-card-foreground sm:text-[23px]">
+                Développeur depuis plus de cinq ans, j'ai commencé
+                par bâtir des interfaces web avant d'élargir ma
+                pratique aux API, aux systèmes back-end et à la
+                livraison de solutions complètes.
+            </p>
+
+            <p class="mt-5 max-w-[740px] text-[15px] leading-[1.8] text-muted-foreground">
+                J'accorde autant d'importance à la clarté du code
+                qu'à la fiabilité, à la performance et à la facilité
+                de maintenance. Chaque décision technique doit
+                servir un besoin concret.
+            </p>
+
+            <!-- Lien vers la page À propos -->
+            <a href="{% url 'about' %}">
+                <c-button class="mt-6 !rounded-full" size="xl">
+                    En savoir plus
+                    <c-icons.arrow_right />
+                </c-button>
+
+            </a>
+
+        </div>
+
+    </div>
+</section>

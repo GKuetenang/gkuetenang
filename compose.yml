@@ -1,0 +1,99 @@
+name: gkuetenang
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: gkuetenang:latest
+  env_file: .env.docker
+  environment:
+    CELERY_BROKER_URL: redis://redis:6379/0
+
+services:
+  # Initialisation de Django
+  setup:
+    <<: *app
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput --clear"
+    volumes:
+      - static_data:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  # Django / Gunicorn
+  web:
+    <<: *app
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - static_data:/app/staticfiles:ro
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Celery Worker
+  celery:
+    <<: *app
+    command: celery -A config worker --loglevel=info
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Celery Beat
+  celery-beat:
+    <<: *app
+    command: >
+      celery -A config beat
+      --loglevel=info
+      --schedule=/tmp/celerybeat-schedule
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # PostgreSQL
+  db:
+    image: postgres:17
+    env_file: .env.docker
+    networks:
+      - default
+    volumes:
+      - gkuetenang_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  gkuetenang_postgres_data:
+  redis_data:
+  static_data:

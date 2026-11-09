@@ -1,0 +1,79 @@
+<section aria-labelledby="portfolio-list-title" class="bg-background py-14 text-foreground sm:py-18 lg:py-20">
+    <div class="page-content">
+        <div class="grid gap-5 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:gap-16">
+            <div>
+                <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary sm:text-xs">Explorer mes projets
+                </p>
+                <h2 id="portfolio-list-title"
+                    class="mt-3 max-w-2xl text-3xl font-bold leading-[1.08] tracking-[-0.05em] sm:text-4xl lg:text-5xl">
+                    Trouvez un projet, une technologie ou un mot-clé.
+                </h2>
+            </div>
+            <p class="max-w-lg text-sm leading-7 text-muted-foreground sm:text-base">
+                Parcourez les projets publiés et découvrez les technologies mobilisées pour chacun d’eux.
+            </p>
+        </div>
+
+        <form method="get" action="{% url 'portfolio' %}" role="search"
+            class="mt-8 grid gap-3 sm:grid-cols-[1fr_auto] sm:gap-4 lg:mt-10">
+            <label for="portfolio-search" class="sr-only">Rechercher une réalisation</label>
+            <div class="relative">
+                <svg class="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-primary"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="m20 20-3.5-3.5"></path>
+                </svg>
+                <c-input id="portfolio-search" type="search" name="q" value="{{ search_form.q.value|default:'' }}"
+                    maxlength="100" autocomplete="off" placeholder="Rechercher un projet, une technologie, un mot-clé…"
+                    class="h-13 !rounded-full bg-card pl-12 pr-5 shadow-sm" />
+            </div>
+            <c-button type="submit" size="xl" class="w-full !rounded-full px-9 sm:w-auto">
+                Rechercher
+            </c-button>
+        </form>
+
+        {% if search_form.q.errors %}
+        <div role="alert" class="mt-3 text-sm text-destructive">{{ search_form.q.errors }}</div>
+        {% endif %}
+
+        {% if projects %}
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3" aria-live="polite">
+            {% for project in projects %}
+            <c-portfolio.project_card :project="project"></c-portfolio.project_card>
+            {% endfor %}
+        </div>
+        {% else %}
+        <c-card class="mt-10 rounded-2xl border-dashed">
+            <c-card.content class="p-8 text-center sm:p-12">
+                <c-card.title class="text-xl">Aucun résultat</c-card.title>
+                <c-card.description class="mt-2">Essayez un autre projet, une technologie ou un
+                    mot-clé.</c-card.description>
+                <a href="{% url 'portfolio' %}"
+                    class="mt-5 inline-flex rounded-full px-4 py-2 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                    Réinitialiser
+                    la recherche</a>
+            </c-card.content>
+        </c-card>
+        {% endif %}
+
+        <div
+            class="relative mt-12 overflow-hidden rounded-3xl bg-navy px-6 py-9 text-cream sm:px-10 lg:mt-16 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-10 lg:px-12">
+            <div aria-hidden="true"
+                class="absolute -right-10 -top-16 size-48 rotate-45 rounded-[3rem] border border-primary/60"></div>
+            <div class="relative">
+                <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Un projet en tête&nbsp;?</p>
+                <h2 class="mt-2 text-2xl font-bold tracking-[-0.04em] sm:text-3xl">Discutons de <span
+                        class="text-primary">votre idée.</span></h2>
+            </div>
+            <div aria-hidden="true" class="my-6 h-px bg-cream/25 lg:my-0 lg:h-14 lg:w-px"></div>
+            <div class="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                <p class="max-w-sm text-sm leading-6 text-cream/70">Vous avez un besoin à clarifier ou une idée à
+                    concrétiser&nbsp;? Échangeons simplement.</p>
+                <a href="{% url 'contact' %}"
+                    class="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+                    Me contacter <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

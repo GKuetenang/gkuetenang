@@ -1,0 +1,131 @@
+<header class="sticky top-0 z-50 w-full border-b border-border/70 
+    bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+
+    <nav aria-label="Navigation principale" class="mx-auto flex h-18 page-content items-center justify-between">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5">
+            <div class="text-xl font-bold tracking-tight">
+                <span class="text-primary">G.</span>&nbsp;Kuetenang
+            </div>
+        </a>
+
+        <!-- Navigation desktop -->
+        <div class="hidden items-center gap-1 lg:flex rounded-full 
+            border border-border/50 bg-background/30 px-1 py-1 backdrop-blur 
+            supports-[backdrop-filter]:bg-background/10">
+
+            <a href="{% url 'home' %}" class="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors 
+                {%if request.resolver_match.url_name == 'home' %} bg-primary text-primary-foreground 
+                {% else %} hover:bg-primary/20 hover:text-primary {% endif %}">
+                Accueil
+            </a>
+
+            <a href="{% url 'about' %}" class="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors 
+                {%if request.resolver_match.url_name == 'about' %} bg-primary text-primary-foreground
+                {% else %} hover:bg-primary/20 hover:text-primary {% endif %}
+                ">
+                À propos
+            </a>
+
+            <a href="{% url 'services' %}" class="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors 
+                {%if request.resolver_match.url_name == 'services' %} bg-primary text-primary-foreground
+                {% else %} hover:bg-primary/20 hover:text-primary {% endif %}
+                ">
+                Services
+            </a>
+
+            <a href="{% url 'portfolio' %}" class="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors
+                {%if request.resolver_match.url_name == 'portfolio' %} bg-primary text-primary-foreground
+                {% else %} hover:bg-primary/20 hover:text-primary {% endif %}
+                ">
+                Réalisations
+            </a>
+
+
+            <a href="{% url 'contact' %}" class="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors
+                {%if request.resolver_match.url_name == 'contact' %} bg-primary text-primary-foreground
+                {% else %} hover:bg-primary/20 hover:text-primary {% endif %}
+                ">
+                Contact
+            </a>
+
+        </div>
+
+        <!-- Actions desktop -->
+        <div class="hidden items-center gap-3 lg:flex">
+
+            <!-- <a href="/contact/"
+                class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+                Discuton d'un projet
+            </a> -->
+
+        </div>
+
+        <!-- Mobile navigation -->
+        <div class="lg:hidden">
+
+            <c-sheet>
+
+                <c-sheet.trigger>
+                    <c-button type="button" variant="outline" size="icon" aria-label="Ouvrir le menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </c-button>
+                </c-sheet.trigger>
+
+                <c-sheet.content side="right" class="w-[85vw] max-w-sm h-screen">
+
+                    <c-sheet.header>
+                        <c-sheet.title>
+                            Figuil.com
+                        </c-sheet.title>
+                        <c-sheet.description>
+                            Découvrez nos services.
+                        </c-sheet.description>
+                    </c-sheet.header>
+
+                    <nav aria-label="Navigation mobile" class="mt-8 flex flex-col gap-2 lg:px-4">
+
+                        <a href="{% url 'home' %}"
+                            class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-primary">
+                            Projets
+                        </a>
+
+                        <a href="{% url 'about' %}"
+                            class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-primary">
+                            À propos
+                        </a>
+
+
+
+                        <a href="{% url 'services' %}"
+                            class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-primary">
+                            Services
+                        </a>
+
+                        <a href="{% url 'portfolio' %}"
+                            class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-primary">
+                            Réalisations
+                        </a>
+
+                        <div class="mt-6 border-t border-border pt-6">
+                            <a href="{% url 'contact' %}"
+                                class="inline-flex h-10 w-full items-center justify-center rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+                                Discuton d'un projet
+                            </a>
+                        </div>
+
+                    </nav>
+
+                </c-sheet.content>
+
+            </c-sheet>
+
+        </div>
+
+    </nav>
+</header>

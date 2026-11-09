@@ -1,0 +1,36 @@
+{% extends "emails/base.html" %}
+
+{% block email_title %}Nouveau message de contact{% endblock %}
+{% block preheader %}Nouveau message reçu de {{ name }}.{% endblock %}
+{% block eyebrow %}● &nbsp; Nouveau message{% endblock %}
+{% block heading %}Une nouvelle prise<br><span style="color:#ad9cff;">de contact.</span>{% endblock %}
+{% block introduction %}Quelqu’un vient de vous écrire depuis le formulaire de contact de votre portfolio.{% endblock %}
+
+{% block content %}
+  <p style="margin:0 0 18px; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1.4px; color:#765cf1; text-transform:uppercase;">Informations du message</p>
+  <p style="margin:0; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1px; color:#666a7c; text-transform:uppercase;">Nom complet</p>
+  <p style="margin:4px 0 18px; font-size:16px; line-height:24px; font-weight:700; color:#202330;">{{ name }}</p>
+  <div style="height:1px; background:#dedee5; font-size:0; line-height:0;">&nbsp;</div>
+  <p style="margin:16px 0 0; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1px; color:#666a7c; text-transform:uppercase;">Email</p>
+  <p style="margin:4px 0 18px; font-size:16px; line-height:24px; font-weight:700;"><a href="mailto:{{ email }}" style="color:#765cf1; text-decoration:none;">{{ email }}</a></p>
+  <div style="height:1px; background:#dedee5; font-size:0; line-height:0;">&nbsp;</div>
+  <p style="margin:16px 0 0; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1px; color:#666a7c; text-transform:uppercase;">Sujet</p>
+  <p style="margin:4px 0 24px; font-size:16px; line-height:24px; font-weight:700; color:#202330;">{{ subject|default:"Sans objet" }}</p>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%; border-collapse:collapse; background:#f7f7f3; border-left:4px solid #765cf1;">
+    <tr>
+      <td style="padding:20px 22px;">
+        <p style="margin:0 0 12px; font-size:11px; line-height:18px; font-weight:700; letter-spacing:1px; color:#666a7c; text-transform:uppercase;">Message</p>
+        <div style="font-size:15px; line-height:28px; color:#292d3d;">{{ message|linebreaksbr }}</div>
+      </td>
+    </tr>
+  </table>
+  <p style="margin:20px 0 0; font-size:11px; line-height:18px; color:#7c7e89;">Référence : {{ contact_id }}{% if submitted_at %} · Reçu le {{ submitted_at|date:"d/m/Y à H:i" }}{% endif %}</p>
+{% endblock %}
+
+{% block notice %}
+  <tr>
+    <td class="email-padding" style="padding:22px 32px; background:#efebff; color:#4a4568; font-size:13px; line-height:21px;">
+      <strong>Pour répondre :</strong> utilisez simplement la fonction « Répondre » de votre messagerie. L’adresse du visiteur est configurée en Reply-To.
+    </td>
+  </tr>
+{% endblock %}

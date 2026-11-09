@@ -1,0 +1,38 @@
+<section id="realisations" aria-labelledby="realisations-title"
+    class="bg-background py-16 text-foreground sm:py-20 lg:py-24">
+    <div class="page-content">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+            <div>
+                <p class="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-primary sm:text-[11px]">
+                    04 / Réalisations
+                </p>
+
+                <h2 id="realisations-title"
+                    class="text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.06em]">
+                    Du concept au <span class="text-primary">produit.</span>
+                </h2>
+            </div>
+
+            <p class="max-w-62.5 text-sm leading-6 text-muted-foreground lg:mb-1">
+                Découvrez mes réalisations les plus récentes et les technologies utilisées pour les construire.
+            </p>
+        </div>
+
+        {% if featured_projects %}
+            <div class="mt-9 grid gap-5 lg:grid-cols-2">
+                {% for project in featured_projects %}
+                    <c-portfolio.project_card :project="project"></c-portfolio.project_card>
+                {% endfor %}
+            </div>
+        {% else %}
+            <c-card class="mt-9 rounded-2xl border-dashed">
+                <c-card.content class="p-8 text-center sm:p-12">
+                    <c-card.title class="text-xl">Réalisations à venir</c-card.title>
+                    <c-card.description class="mt-2">
+                        Les premiers projets seront bientôt disponibles.
+                    </c-card.description>
+                </c-card.content>
+            </c-card>
+        {% endif %}
+    </div>
+</section>

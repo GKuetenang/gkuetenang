@@ -1,0 +1,47 @@
+{% load static %}
+<c-vars project></c-vars>
+
+<article class="h-full">
+    <c-card
+        class="group flex h-full flex-col overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:transform-none motion-reduce:transition-none">
+        <div
+            class="relative m-3 mb-0 aspect-[16/9] overflow-hidden rounded-xl border border-border bg-muted sm:m-4 sm:mb-0">
+            <a href="{% if project.demo_link %}{{ project.demo_link }}{% elif project.source_link %}{{ project.source_link }}{% else %}#{% endif %}"
+                class="block size-full" {% if project.demo_link or project.source_link %} target="_blank"
+                rel="noopener noreferrer" {% endif %} aria-label="Découvrir le projet {{ project.title }}">
+                {% if project.featured_image %}
+                <img src="{{ project.featured_image.url }}" alt="Aperçu du projet {{ project.title }}"
+                    class="size-full object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none"
+                    loading="lazy" decoding="async">
+                {% else %}
+                <img src="{% static 'project_placeholder.png' %}"
+                    alt="Aperçu bientôt disponible pour {{ project.title }}" class="size-full object-cover"
+                    loading="lazy" decoding="async">
+                {% endif %}
+            </a>
+            <!-- <span
+                class="absolute right-3 top-3 rounded-full bg-background/90 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-primary shadow-sm backdrop-blur">
+                Projet
+            </span> -->
+        </div>
+
+        <c-card.content class="flex flex-1 flex-col px-4 pb-4 pt-5 sm:px-5 sm:pb-5">
+            <c-card.title class="text-base leading-6 tracking-[-0.025em] sm:text-lg">
+                {{ project.title }}
+            </c-card.title>
+            <c-card.description class="mt-2 flex-1 text-xs leading-5 sm:text-sm sm:leading-6">
+                {{ project.tagline }}
+            </c-card.description>
+            <div class="mt-auto flex flex-wrap gap-2 pt-4" aria-label="Technologies utilisées">
+                {% for tag in project.tags.all %}
+                <span
+                    class="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground sm:text-xs">
+                    {{ tag.name }}
+                </span>
+                {% empty %}
+                <span class="text-xs text-muted-foreground">Technologies à préciser</span>
+                {% endfor %}
+            </div>
+        </c-card.content>
+    </c-card>
+</article>
