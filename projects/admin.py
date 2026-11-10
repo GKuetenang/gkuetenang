@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.forms import ModelForm
+from django.templatetags.static import static
+from django.utils.html import format_html
+
 from unfold.admin import ModelAdmin
 from unfold.widgets import UnfoldAdminTextareaWidget
-from django.utils.html import format_html
+
 from .models import Project, Tag
 
 
@@ -33,13 +36,17 @@ class ProjectAdmin(ModelAdmin):
 
     @admin.display(description="Aperçu")
     def featured_image_preview(self, obj):
-
+        image_url = (
+            obj.featured_image.url
+            if obj.has_featured_image
+            else static("images/project_placeholder.png")
+        )
         return format_html(
             '<img src="{}" alt="{}" '
             'style="width: 96px; height: 64px; '
             'object-fit: cover; border-radius: 8px;" '
             'loading="lazy">',
-            obj.featured_image.url,
+            image_url,
             obj.title,
         )
 

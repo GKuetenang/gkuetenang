@@ -18,6 +18,8 @@ from celery.schedules import crontab
 import dj_database_url
 from dotenv import load_dotenv
 
+from config.storage import build_media_storage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,7 +78,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -157,18 +159,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# ==========================================
+# STATIC — Project files
+# ==========================================
+
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# ==========================================
+# MEDIA — Uploaded files
+# ==========================================
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+R2_ENABLED = env_bool("R2_ENABLED", False)
 
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
+    "default": build_media_storage(
+        use_r2=R2_ENABLED,
+        environ=os.environ,
+    ),
     "staticfiles": {
         "BACKEND": (
             "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -176,8 +192,12 @@ STORAGES = {
     },
 }
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+if R2_ENABLED:
+    # Alias used by the explicit, non-destructive local-to-R2 copy command.
+    STORAGES["r2"] = build_media_storage(
+        use_r2=True,
+        environ=os.environ,
+    )
 
 DJANGO_VITE = {
     "default": {

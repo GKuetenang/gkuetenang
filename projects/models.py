@@ -1,6 +1,16 @@
+import uuid
+
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.functions import Lower
-import uuid
+
+from projects.validators import validate_project_image_size
+
+
+LEGACY_PROJECT_PLACEHOLDERS = {
+    "project_placeholder.jpg",
+    "project_placeholder.png",
+}
 
 
 class Tag(models.Model):
@@ -28,7 +38,15 @@ class Project(models.Model):
     description = models.TextField(null=True, blank=True)
     demo_link = models.CharField(max_length=2000, null=True, blank=True)
     featured_image = models.ImageField(
-        null=True, blank=True, default="project_placeholder.png"
+        upload_to="projects/",
+        null=True,
+        blank=True,
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=("jpg", "jpeg", "png", "webp")
+            ),
+            validate_project_image_size,
+        ],
     )
     source_link = models.CharField(max_length=2000, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -39,3 +57,10 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def has_featured_image(self) -> bool:
+        return bool(
+            self.featured_image
+            and self.featured_image.name not in LEGACY_PROJECT_PLACEHOLDERS
+        )

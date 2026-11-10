@@ -30,7 +30,7 @@ services:
       - "127.0.0.1:8000:8000"
     volumes:
       - static_data:/app/staticfiles:ro
-      - media_date:/app/media
+      - media_data:/app/media
     depends_on:
       setup:
         condition: service_completed_successfully

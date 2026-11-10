@@ -28,6 +28,9 @@ check:
 shell:
 	$(UV) python manage.py shell
 
+collectstatic:
+	$(UV) python manage.py collectstatic
+
 # ----------------------------------------
 # Emails - Django Post Office
 # ----------------------------------------

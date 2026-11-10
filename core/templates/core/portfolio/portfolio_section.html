@@ -37,7 +37,7 @@
         {% endif %}
 
         {% if projects %}
-        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3" aria-live="polite">
+        <div class="mt-10 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3" aria-live="polite">
             {% for project in projects %}
             <c-portfolio.project_card :project="project"></c-portfolio.project_card>
             {% endfor %}

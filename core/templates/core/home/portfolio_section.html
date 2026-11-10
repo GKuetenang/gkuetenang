@@ -19,7 +19,7 @@
         </div>
 
         {% if featured_projects %}
-            <div class="mt-9 grid gap-5 lg:grid-cols-2">
+            <div class="mt-9 grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-2">
                 {% for project in featured_projects %}
                     <c-portfolio.project_card :project="project"></c-portfolio.project_card>
                 {% endfor %}

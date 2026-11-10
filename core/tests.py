@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from django.core.management import call_command
 from django.db import DatabaseError
+from django.templatetags.static import static
 from django.template.loader import render_to_string
 from django.test import Client, TestCase, override_settings
 from django.utils import timezone
@@ -279,7 +280,10 @@ class PortfolioViewTests(TestCase):
         self.assertEqual(len(response.context["projects"]), 3)
         self.assertContains(response, "Gestion des utilisateurs")
         self.assertContains(response, "Django")
-        self.assertContains(response, "/media/project_placeholder.png")
+        self.assertContains(
+            response,
+            static("images/project_placeholder.png"),
+        )
 
     def test_portfolio_search_filters_projects(self):
         response = self.client.get("/portfolio/", {"q": "API REST"})
