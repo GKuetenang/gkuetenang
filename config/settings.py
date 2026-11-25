@@ -18,6 +18,8 @@ from celery.schedules import crontab
 import dj_database_url
 from dotenv import load_dotenv
 from django.templatetags.static import static
+import sentry_sdk
+
 
 from config.storage import build_media_storage
 
@@ -374,3 +376,20 @@ LOGGING = {
         }
     }
 }
+
+
+sentry_sdk.init(
+    dsn=os.getenv('SENTRY_DSN'),
+    # To customize collected data (user info, request bodies, AI inputs/outputs),
+    # see https://docs.sentry.io/platforms/python/data-management/data-collected/
+    # data_collection={"user_info": False},
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for tracing.
+    traces_sample_rate=1.0,
+    # Set profile_session_sample_rate to 1.0 to profile 100%
+    # of profile sessions.
+    profile_session_sample_rate=1.0,
+    # Set profile_lifecycle to "trace" to automatically
+    # run the profiler on when there is an active transaction
+    profile_lifecycle="trace",
+)

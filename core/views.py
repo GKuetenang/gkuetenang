@@ -11,10 +11,7 @@ from .utils import search_projects
 
 from core.forms import ContactForm, PortfolioSearchForm
 from core.mails import queue_contact_emails
-
-logger = logging.getLogger(__name__)
-
-# Create your views here.
+import sentry_sdk
 
 
 def index(request):
@@ -23,7 +20,9 @@ def index(request):
         .prefetch_related("tags")
         .order_by("-created")[:2]
     )
-    logger.info("Testing Logger!")
+    sentry_sdk.logger.info('This is an info log message')
+    sentry_sdk.logger.warning('This is a warning message')
+    sentry_sdk.logger.error('This is an error message')
 
     context = {
         "featured_projects": featured_projects,
