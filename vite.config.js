@@ -1,12 +1,12 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [tailwindcss()],
 
-  // Les chemins sont différents en développement
-  // et après compilation pour Django.
-  base: command === "build" ? "/static/" : "/",
+  // django-vite préfixe également les ressources de développement
+  // avec STATIC_URL ; Vite doit donc servir les deux modes sous /static/.
+  base: "/static/",
 
   server: {
     host: "127.0.0.1",
@@ -32,4 +32,4 @@ export default defineConfig(({ command }) => ({
       input: "frontend/main.js",
     },
   },
-}));
+});

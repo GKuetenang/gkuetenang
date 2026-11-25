@@ -23,6 +23,7 @@ def index(request):
         .prefetch_related("tags")
         .order_by("-created")[:2]
     )
+    logger.info("Testing Logger!")
 
     context = {
         "featured_projects": featured_projects,

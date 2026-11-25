@@ -4,11 +4,11 @@
 <article class="h-full min-w-0 max-w-full">
     <c-card
         class="group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:transform-none motion-reduce:transition-none">
-        <div
-            class="relative m-3 mb-0 min-w-0 overflow-hidden rounded-xl border border-border bg-muted sm:m-4 sm:mb-0">
+        <div class="relative m-3 mb-0 min-w-0 overflow-hidden rounded-xl border border-border bg-muted sm:m-4 sm:mb-0">
             <a href="{% if project.demo_link %}{{ project.demo_link }}{% elif project.source_link %}{{ project.source_link }}{% else %}#{% endif %}"
-                class="block aspect-video size-full min-w-0 overflow-hidden" {% if project.demo_link or project.source_link %} target="_blank"
-                rel="noopener noreferrer" {% endif %} aria-label="Découvrir le projet {{ project.title }}">
+                class="block aspect-video size-full min-w-0 overflow-hidden" {% if project.demo_link or project.source_link %}
+                target="_blank" rel="noopener noreferrer" {% endif %}
+                aria-label="Découvrir le projet {{ project.title }}">
                 {% if project.has_featured_image %}
                 <img src="{{ project.featured_image.url }}" alt="Aperçu du projet {{ project.title }}"
                     class="block size-full max-w-full object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none"

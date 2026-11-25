@@ -7,11 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=, maximum-scale-1">
-    <title>{{ seo.title }}</title>
-    <meta name="description" content="{{ seo.description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ seo.title }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ seo.description }}{% endblock %}">
     <meta name="author" content="Gustave Kuetenang">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large{% endblock %}">
     <link rel="canonical" href="{{ seo.canonical_url }}">
 
     <meta property="og:type" content="website">

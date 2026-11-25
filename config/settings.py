@@ -17,6 +17,7 @@ import os
 from celery.schedules import crontab
 import dj_database_url
 from dotenv import load_dotenv
+from django.templatetags.static import static
 
 from config.storage import build_media_storage
 
@@ -75,6 +76,73 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'projects.apps.ProjectsConfig',
 ]
+
+# ==========================================
+# DJANGO UNFOLD — GKUETENANG BRANDING
+# ==========================================
+
+UNFOLD = {
+    "SITE_TITLE": "Gkuetenang | Administration",
+    "SITE_HEADER": "Gkuetenang",
+    "SITE_SUBHEADER": "Administration",
+    "SITE_URL": "/",
+
+    # Identité visuelle
+    "SITE_ICON": lambda request: static(
+        "images/favicon.svg"
+    ),
+
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "href": lambda request: static(
+                "images/favicon.svg"
+            ),
+        },
+    ],
+
+    # Préserve le choix clair / sombre d'Unfold :
+    # Ne pas forcer "THEME" à "light" ou "dark".
+
+    "BORDER_RADIUS": "10px",
+
+    "COLORS": {
+        "primary": {
+            "50": "#EFF6FF",
+            "100": "#DBEAFE",
+            "200": "#BFDBFE",
+            "300": "#93C5FD",
+            "400": "#60A5FA",
+            "500": "#3B82F6",
+            "600": "#2563EB",
+            "700": "#1D4ED8",
+            "800": "#1E40AF",
+            "900": "#1E3A8A",
+            "950": "#172554",
+        },
+        "base": {
+            "50": "#F7F7F3",
+            "100": "#F1F2F0",
+            "200": "#E2E5E9",
+            "300": "#C9D0DB",
+            "400": "#96A2B7",
+            "500": "#64748B",
+            "600": "#48556A",
+            "700": "#35425A",
+            "800": "#253148",
+            "900": "#19243A",
+            "950": "#121726",
+        },
+    },
+
+    "STYLES": [
+        lambda request: static(
+            "css/unfold-brand.css"
+        ),
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -271,4 +339,38 @@ CELERY_BEAT_SCHEDULE = {
         "task": "post_office.tasks.send_queued_mail",
         "schedule": crontab(minute="*/10"),
     },
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": os.getenv('DJANGO_LOG_FILE', "general.log"),
+            "level": os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            "formatter": "verbose"
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            "formatter": "simple"
+        }
+    },
+    "loggers": {
+        "": {
+            "level": os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            "handlers": ["file", "console"]
+        }
+    },
+    "formatters": {
+        "simple": {
+            "format": "{asctime}:{levelname} {message}",
+            "style": "{"
+        },
+        "verbose": {
+            "format": "{asctime}:{levelname} - {name} {module}.py (line {lineno:d}). {message}",
+            "style": "{"
+        }
+    }
 }

@@ -11,6 +11,15 @@ RUN corepack enable
 # Copier les manifestes pour optimiser le cache
 COPY package.json pnpm-lock.yaml ./
 
+# Télécharger la version de pnpm déclarée par le projet dans une couche
+# dédiée. Les nouvelles tentatives couvrent les erreurs DNS transitoires
+# sans modifier la version ni le registre configurés.
+RUN for attempt in 1 2 3; do \
+        corepack install && break; \
+        if [ "$attempt" -eq 3 ]; then exit 1; fi; \
+        sleep "$((attempt * 2))"; \
+    done
+
 # Installer les dépendances exactement
 # comme définies dans pnpm-lock.yaml
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \

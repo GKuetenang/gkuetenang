@@ -6,13 +6,56 @@ from django.core.management import call_command
 from django.db import DatabaseError
 from django.templatetags.static import static
 from django.template.loader import render_to_string
-from django.test import Client, TestCase, override_settings
+from django.test import Client, SimpleTestCase, TestCase, override_settings
 from django.utils import timezone
 from post_office.models import EmailTemplate
 
 from core.mails import queue_contact_emails
 from core.models import Contact
 from projects.models import Project, Tag
+
+
+@override_settings(
+    DEBUG=False,
+    STORAGES={
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": (
+                "django.contrib.staticfiles.storage.StaticFilesStorage"
+            ),
+        },
+    },
+)
+class NotFoundPageTests(SimpleTestCase):
+    def test_unknown_route_renders_accessible_404_page(self):
+        response = self.client.get("/page-inexistante/")
+
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, "404.html")
+        self.assertContains(
+            response,
+            "Cette route s’arrête ici.",
+            status_code=404,
+        )
+        self.assertContains(
+            response,
+            "<title>Page introuvable | Gustave Kuetenang</title>",
+            status_code=404,
+            html=True,
+        )
+        self.assertContains(
+            response,
+            'name="robots" content="noindex, follow"',
+            status_code=404,
+        )
+        self.assertContains(response, 'href="/"', status_code=404)
+        self.assertContains(
+            response,
+            'href="/portfolio/"',
+            status_code=404,
+        )
 
 
 class EmailTemplateInitializationTests(TestCase):
