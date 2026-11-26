@@ -1,3 +1,4 @@
+from django.contrib.staticfiles import finders
 from django.core.exceptions import ImproperlyConfigured
 from django.test import SimpleTestCase
 from storages.backends.s3 import S3Storage
@@ -14,6 +15,13 @@ R2_ENVIRONMENT = {
     ),
     "R2_PUBLIC_HOSTNAME": "media.example.com",
 }
+
+
+class StaticAssetConfigurationTests(SimpleTestCase):
+    def test_unfold_brand_stylesheet_is_discoverable(self):
+        self.assertIsNotNone(
+            finders.find("css/unfold-brand.css"),
+        )
 
 
 class MediaStorageConfigurationTests(SimpleTestCase):
